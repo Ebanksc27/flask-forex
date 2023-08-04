@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Forex Converter</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <div class="container">
+            <h2>Forex Converter</h2>
+            <form method="POST">
+                <div class="amount">
+                    <p>Amount</p>
+                    <input type="number" name="amount" required>
+                </div>
+                <div class="convert-box">
+                    <div class="from">
+                        <p>From</p>
+                        <select name="from_currency" required>
+                            {% for currency in currencies %}
+                            <option value="{{ currency }}" {% if currency == "USD" %}selected{% endif %}>{{ currency }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="to">
+                        <p>To</p>
+                        <select name="to_currency" required>
+                            {% for currency in currencies %}
+                            <option value="{{ currency }}" {% if currency == "EUR" %}selected{% endif %}>{{ currency }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button>Convert</button>
+                </div>
+            </form>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="result">{{ messages[0] }}</div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </body>
+</html>
+
+
+
